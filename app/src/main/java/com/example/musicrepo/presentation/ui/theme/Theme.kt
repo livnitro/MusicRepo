@@ -1,4 +1,4 @@
-package com.example.musicrepo.ui.theme
+package com.example.musicrepo.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
