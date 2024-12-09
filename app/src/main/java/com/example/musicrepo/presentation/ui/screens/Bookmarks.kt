@@ -18,10 +18,12 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.example.musicrepo.utils.*
 
 
 @Composable
 fun BookmarksScreen(innerPadding : PaddingValues){
+
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -44,6 +46,7 @@ fun BookmarksScreen(innerPadding : PaddingValues){
                 Text(
                     text = "MusicRepo",
                     fontSize = 32.sp,
+                    fontFamily = righteousFont,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
@@ -52,6 +55,7 @@ fun BookmarksScreen(innerPadding : PaddingValues){
         Text(
             text = "Guardados",
             fontSize = 24.sp,
+            fontFamily = righteousFont,
             fontWeight = FontWeight.Bold,
             color = Color.White,
             modifier = Modifier
@@ -110,11 +114,13 @@ fun BookmarkCard(item: BookmarkItem) {
                 Text(
                     text = item.brand,
                     fontSize = 16.sp,
+                    fontFamily = robotoFont,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = item.model,
                     fontSize = 14.sp,
+                    fontFamily = robotoFont,
                     color = Color.Gray
                 )
             }
