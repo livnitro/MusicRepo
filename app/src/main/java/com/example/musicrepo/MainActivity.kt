@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.musicrepo.presentation.ui.screens.HomeScreen
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
+import com.example.musicrepo.ui.screens.GuitarsScreen
 import com.example.musicrepo.utils.Screen
 
 class MainActivity : ComponentActivity() {
@@ -28,10 +29,10 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.Home.route
+                        startDestination = Screen.Guitars.route
                     ){
-                        composable(route = Screen.Home.route) {
-                            HomeScreen(innerPadding = innerPadding)
+                        composable(route = Screen.Guitars.route) {
+                            GuitarsScreen(innerPadding = innerPadding)
                         }
                     }
                 }
