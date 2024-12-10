@@ -65,7 +65,7 @@ fun IntrumentsScreen(innerPadding : PaddingValues){
         Text("Instrumentos", modifier = Modifier.padding(start = 10.dp, top = 20.dp, bottom = 20.dp), fontWeight = FontWeight.Bold)
         LazyColumn (modifier = Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp), verticalArrangement = Arrangement.spacedBy(20.dp)){
             items(instruments){
-                RecienteItem(nombre = it.nombre, descr = it.descr)
+                RecienteItem(nombre = it.nombre, descr = it.descr, imagen = it.imagen)
             }
         }
     }

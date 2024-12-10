@@ -33,13 +33,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.musicrepo.R
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
 import com.example.musicrepo.utils.righteousFont
 import com.example.musicrepo.utils.robotoFont
 
 @Composable
-fun RecienteItem(nombre : String, descr : String){
+fun RecienteItem(nombre : String, descr : String, imagen: String = ""){
     Card (
         modifier = Modifier
             .height(100.dp)
@@ -62,9 +63,10 @@ fun RecienteItem(nombre : String, descr : String){
                     .clip(RoundedCornerShape(20.dp))
                     .background(Color.White)
             ){
-                Image(
-                    painter = painterResource(id = R.drawable.guitarra),
-                    contentDescription = "Guitarra",
+                AsyncImage(
+                    model = imagen,
+                    contentDescription = descr,
+                    modifier = Modifier.fillMaxSize()
                 )
             }
             Column (
