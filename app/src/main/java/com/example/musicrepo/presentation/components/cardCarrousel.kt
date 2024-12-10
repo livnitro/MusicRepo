@@ -40,6 +40,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.musicrepo.R
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
+import com.example.musicrepo.utils.righteousFont
+import com.example.musicrepo.utils.robotoFont
 
 
 @Composable
@@ -59,7 +61,8 @@ fun CardCarrousel(){
                 fontSize = 17.sp,
                 fontWeight = FontWeight.ExtraBold,
                 textAlign = TextAlign.Start,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                fontFamily = robotoFont
             )
             Text(
                 text = "Fender Stratocaster",
@@ -67,7 +70,8 @@ fun CardCarrousel(){
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.tertiary,
                 textAlign = TextAlign.Start,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                fontFamily = robotoFont
             )
 
             Box (
@@ -80,7 +84,8 @@ fun CardCarrousel(){
                     text = "GUITARRA",
                     fontSize = 35.sp,
                     fontWeight = FontWeight.ExtraBold,
-                    color = MaterialTheme.colorScheme.onSecondary
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    fontFamily = righteousFont
                 )
                 Image(
                     painter = painterResource(id = R.drawable.guitarra),

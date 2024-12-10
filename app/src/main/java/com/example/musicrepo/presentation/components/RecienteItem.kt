@@ -29,11 +29,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.musicrepo.R
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
+import com.example.musicrepo.utils.righteousFont
+import com.example.musicrepo.utils.robotoFont
 
 @Composable
 fun RecienteItem(){
@@ -71,11 +74,14 @@ fun RecienteItem(){
             ){
                 Text(
                     text = "Guitarra electrica",
+                    fontFamily = robotoFont,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = "Fender Stratocaster",
                     color = MaterialTheme.colorScheme.tertiary,
-                    fontSize = 12.sp
+                    fontSize = 12.sp,
+                    fontFamily = robotoFont
                 )
             }
             Spacer(modifier = Modifier.weight(1f))

@@ -37,15 +37,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.lerp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import com.example.musicrepo.R
 import com.example.musicrepo.presentation.components.CardCarrousel
 import com.example.musicrepo.presentation.components.RecienteItem
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
+import com.example.musicrepo.utils.righteousFont
+import com.example.musicrepo.utils.robotoFont
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
@@ -69,7 +74,8 @@ fun HomeScreen(innerPadding : PaddingValues){
                 modifier = Modifier.width(170.dp),
                 fontSize = 24.sp,
                 color = Color.White,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                fontFamily = righteousFont
             )
         }
 
@@ -154,7 +160,8 @@ fun HomeScreen(innerPadding : PaddingValues){
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(start = 30.dp, top = 20.dp, bottom = 20.dp, end = 20.dp),
-            color = Color.White
+            color = Color.White,
+            fontFamily = righteousFont
         )
         Column (
             modifier = Modifier
