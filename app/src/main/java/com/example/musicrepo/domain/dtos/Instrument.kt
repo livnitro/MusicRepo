@@ -6,5 +6,6 @@ data class Instrument(
     val marca : String,
     val modelo : String,
     val tipo : String,
-    val imagen : String
+    val imagen : String,
+    val catId : Int
 )

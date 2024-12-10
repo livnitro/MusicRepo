@@ -22,10 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.musicrepo.datasource.service.InstrumentsService
 import com.example.musicrepo.domain.dtos.Instrument
 import com.example.musicrepo.domain.dtos.InstrumentResponse
 import com.example.musicrepo.presentation.components.RecienteItem
+import com.example.musicrepo.utils.Screen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -34,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 @Composable
-fun IntrumentsScreen(innerPadding : PaddingValues){
+fun IntrumentsScreen(innerPadding : PaddingValues, navController: NavController){
     val scope = rememberCoroutineScope()
     var instruments by remember {
         mutableStateOf(emptyList<InstrumentResponse>())
@@ -65,7 +67,9 @@ fun IntrumentsScreen(innerPadding : PaddingValues){
         Text("Instrumentos", modifier = Modifier.padding(start = 10.dp, top = 20.dp, bottom = 20.dp), fontWeight = FontWeight.Bold)
         LazyColumn (modifier = Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp), verticalArrangement = Arrangement.spacedBy(20.dp)){
             items(instruments){
-                RecienteItem(nombre = it.nombre, descr = it.descr, imagen = it.imagen)
+                RecienteItem(nombre = it.nombre, descr = it.descr, imagen = it.imagen, ({
+                    navController.navigate(Screen.InstrumentDetail.route)
+                }))
             }
         }
     }
@@ -77,5 +81,5 @@ fun IntrumentsScreen(innerPadding : PaddingValues){
 )
 @Composable
 fun InstrumentsScreenPreview(){
-    IntrumentsScreen(PaddingValues(0.dp))
+
 }

@@ -6,6 +6,6 @@ data class TabBarItem(
     val title : String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
-    val badgeAmount : Int
+    val badgeAmount : Int? = null
 
 )

@@ -2,6 +2,7 @@ package com.example.musicrepo.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,11 +41,12 @@ import com.example.musicrepo.utils.righteousFont
 import com.example.musicrepo.utils.robotoFont
 
 @Composable
-fun RecienteItem(nombre : String, descr : String, imagen: String = ""){
+fun RecienteItem(nombre : String, descr : String, imagen: String = "", onClick: () -> Unit){
     Card (
         modifier = Modifier
             .height(100.dp)
             .fillMaxWidth()
+            .clickable { onClick() }
         ,
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
@@ -103,6 +105,6 @@ fun RecienteItem(nombre : String, descr : String, imagen: String = ""){
 @Composable
 fun RecienteItemPreview(){
     MusicRepoTheme {
-        RecienteItem("Prueba", "Descr")
+        RecienteItem("Prueba", "Descr", onClick = ({}))
     }
 }

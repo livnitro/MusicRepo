@@ -169,8 +169,8 @@ fun HomeScreen(innerPadding : PaddingValues){
                 .padding(horizontal = 30.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ){
-            RecienteItem("Preuba", "prueba")
-            RecienteItem("prueba", "Prueba")
+            RecienteItem("Preuba", "prueba", onClick = ({}))
+            RecienteItem("prueba", "Prueba", onClick = ({}))
         }
     }
 }

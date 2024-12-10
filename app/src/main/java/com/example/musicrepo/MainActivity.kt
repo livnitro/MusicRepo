@@ -44,6 +44,8 @@ import com.example.musicrepo.presentation.models.TabBarItem
 import com.example.musicrepo.presentation.ui.screens.BookmarksScreen
 import com.example.musicrepo.presentation.ui.screens.GuitarsScreen
 import com.example.musicrepo.presentation.ui.screens.HomeScreen
+import com.example.musicrepo.presentation.ui.screens.InstrumentDetailScreen
+import com.example.musicrepo.presentation.ui.screens.InstrumentsCatScreen
 import com.example.musicrepo.presentation.ui.screens.IntrumentsScreen
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
 import com.example.musicrepo.utils.Screen
@@ -56,10 +58,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MusicRepoTheme {
-                val homeTab = TabBarItem(title = "Inicio", selectedIcon = Icons.Filled.Home, unselectedIcon = Icons.Outlined.Home, 0)
-                val alertsTab = TabBarItem(title = "Instrumentos", selectedIcon = Icons.Filled.List, unselectedIcon = Icons.Outlined.List, badgeAmount = 7)
-                val settingsTab = TabBarItem(title = "Favoritos", selectedIcon = Icons.Filled.Favorite, unselectedIcon = Icons.Outlined.FavoriteBorder, 0)
-                val moreTab = TabBarItem(title = "More", selectedIcon = Icons.Filled.List, unselectedIcon = Icons.Outlined.List, 0)
+                val homeTab = TabBarItem(title = "Inicio", selectedIcon = Icons.Filled.Home, unselectedIcon = Icons.Outlined.Home)
+                val alertsTab = TabBarItem(title = "Instrumentos", selectedIcon = Icons.Filled.List, unselectedIcon = Icons.Outlined.List)
+                val settingsTab = TabBarItem(title = "Favoritos", selectedIcon = Icons.Filled.Favorite, unselectedIcon = Icons.Outlined.FavoriteBorder)
+                val moreTab = TabBarItem(title = "More", selectedIcon = Icons.Filled.List, unselectedIcon = Icons.Outlined.List)
                 val tabBarItems = listOf(homeTab, alertsTab, settingsTab)
 
                 val navController = rememberNavController()
@@ -71,11 +73,17 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.Home.route) {
                             HomeScreen(innerPadding = innerPadding)
                         }
-                        composable(route = Screen.Instruments.route) {
-                            IntrumentsScreen(innerPadding = innerPadding)
+                        composable(route = Screen.InstrumentsCat.route) {
+                            InstrumentsCatScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = Screen.BookMarks.route) {
                             BookmarksScreen(innerPadding = innerPadding)
+                        }
+                        composable(route = Screen.InstrumentDetail.route) {
+                            InstrumentDetailScreen(innerPadding = innerPadding)
+                        }
+                        composable(route = Screen.Instruments.route) {
+                            IntrumentsScreen(innerPadding = innerPadding, navController = navController)
                         }
                     }
                 }
