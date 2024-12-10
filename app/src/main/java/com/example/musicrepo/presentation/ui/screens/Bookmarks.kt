@@ -18,12 +18,12 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.example.musicrepo.presentation.components.BookmarkItem
+import com.example.musicrepo.presentation.components.BookmarkItemView
 import com.example.musicrepo.utils.*
-
 
 @Composable
 fun BookmarksScreen(innerPadding : PaddingValues){
-
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -34,108 +34,49 @@ fun BookmarksScreen(innerPadding : PaddingValues){
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(110.dp)
+                .height(60.dp)
                 .padding(innerPadding),
             contentAlignment = Alignment.CenterStart
         ){
-            Row(
+            Text(
+                text = "Guardados",
+                fontSize = 24.sp,
+                fontFamily = righteousFont,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
                 modifier = Modifier
-                    .padding(20.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Text(
-                    text = "MusicRepo",
-                    fontSize = 32.sp,
-                    fontFamily = righteousFont,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-            }
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth()
+            )
         }
-        Text(
-            text = "Guardados",
-            fontSize = 24.sp,
-            fontFamily = righteousFont,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .fillMaxWidth()
-        )
-
         BookmarksList()
     }
 }
 
 @Composable
-fun BookmarksList(){
+fun BookmarksList() {
     val bookmarks = listOf(
         BookmarkItem(R.drawable.stratocaster, "Fender", "Stratocaster American Professional II"),
         BookmarkItem(R.drawable.jazzmaster, "Squier", "Classic Vibe '60s Jazzmaster"),
         BookmarkItem(R.drawable.lespaul, "Gibson", "Les Paul Standard 60s Heritage")
     )
 
-    LazyColumn (
-        modifier = Modifier.fillMaxSize(),
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(0.dp),
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
-    ){
-        items(bookmarks.size) { index: Int ->
-            BookmarkCard(bookmarks[index])
-        }
-    }
-}
-
-@Composable
-fun BookmarkCard(item: BookmarkItem) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 8.dp)
-            .size(120.dp),
-        shape = RoundedCornerShape(8.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = item.imageResId),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(Color.Gray, shape = RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop
-            )
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Column {
-                Text(
-                    text = item.brand,
-                    fontSize = 16.sp,
-                    fontFamily = robotoFont,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = item.model,
-                    fontSize = 14.sp,
-                    fontFamily = robotoFont,
-                    color = Color.Gray
-                )
-            }
+        items(bookmarks.size) { index ->
+            BookmarkItemView(item = bookmarks[index])
         }
     }
 }
 
-data class BookmarkItem(val imageResId: Int, val brand: String, val model: String)
-
-@Preview(
-    showBackground = true,
-    showSystemUi = true
-)
+@Preview
 @Composable
-fun BookmarksScreenPreview(){
+fun BookmarksScreenPreview() {
     MusicRepoTheme {
         BookmarksScreen(innerPadding = PaddingValues(0.dp))
     }
