@@ -70,9 +70,9 @@ fun BookmarksScreen(innerPadding : PaddingValues){
 @Composable
 fun BookmarksList(){
     val bookmarks = listOf(
-        BookmarkItem(R.drawable.test, "Fender", "Stratocaster American Ultra II"),
-        BookmarkItem(R.drawable.test, "Squier", "Jazzmaster Classic Vibe '51"),
-        BookmarkItem(R.drawable.test, "Gibson", "Les Paul")
+        BookmarkItem(R.drawable.stratocaster, "Fender", "Stratocaster American Professional II"),
+        BookmarkItem(R.drawable.jazzmaster, "Squier", "Classic Vibe '60s Jazzmaster"),
+        BookmarkItem(R.drawable.lespaul, "Gibson", "Les Paul Standard 60s Heritage")
     )
 
     LazyColumn (
@@ -103,7 +103,7 @@ fun BookmarkCard(item: BookmarkItem) {
                 painter = painterResource(id = item.imageResId),
                 contentDescription = null,
                 modifier = Modifier
-                    .fillMaxHeight()
+                    .size(100.dp)
                     .background(Color.Gray, shape = RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
             )
