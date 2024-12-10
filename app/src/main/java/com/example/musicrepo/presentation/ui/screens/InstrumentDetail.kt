@@ -23,7 +23,7 @@ import com.example.musicrepo.presentation.components.BookmarkItemView
 import com.example.musicrepo.utils.*
 
 @Composable
-fun InstrumentDetailScreen(innerPadding : PaddingValues){
+fun InstrumentDetailScreen(innerPadding : PaddingValues, idInstrument : Int){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -117,6 +117,6 @@ fun InstrumentDetailScreen(innerPadding : PaddingValues){
 @Composable
 fun InstrumentDetailScreenPreview() {
     MusicRepoTheme {
-        InstrumentDetailScreen(innerPadding = PaddingValues(0.dp))
+        InstrumentDetailScreen(innerPadding = PaddingValues(0.dp), 0)
     }
 }

@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.Instruments.route) {
                             IntrumentsScreen(innerPadding = innerPadding)
                         }
-                        composable(settingsTab.title) {
+                        composable(route = Screen.BookMarks.route) {
                             BookmarksScreen(innerPadding = innerPadding)
                         }
                     }
