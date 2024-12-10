@@ -19,12 +19,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.musicrepo.datasource.service.CatService
 import com.example.musicrepo.datasource.service.InstrumentsService
 import com.example.musicrepo.domain.dtos.CatResponse
 import com.example.musicrepo.domain.dtos.InstrumentResponse
+import com.example.musicrepo.domain.use_cases.SharedPref
 import com.example.musicrepo.presentation.components.MiniCatBannerView
 import com.example.musicrepo.utils.Screen
 import kotlinx.coroutines.Dispatchers
@@ -62,6 +64,7 @@ fun InstrumentsCatScreen(innerPadding: PaddingValues, navController: NavControll
         }
     }
 
+    val sharedPref = SharedPref(LocalContext.current)
     Column (modifier =  Modifier.padding(innerPadding).padding(start = 20.dp, end = 20.dp, top = 32.dp)){
         Text("Nuestras Categorias")
         LazyVerticalGrid(
@@ -72,6 +75,7 @@ fun InstrumentsCatScreen(innerPadding: PaddingValues, navController: NavControll
         ) {
             items(cats){
                 MiniCatBannerView(it.nombre, onClick = ({
+                    sharedPref.saveNextId(it.id)
                     navController.navigate(Screen.Instruments.route)
                 }) )
             }
