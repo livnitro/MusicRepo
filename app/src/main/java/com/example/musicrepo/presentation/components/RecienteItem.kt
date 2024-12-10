@@ -39,7 +39,7 @@ import com.example.musicrepo.utils.righteousFont
 import com.example.musicrepo.utils.robotoFont
 
 @Composable
-fun RecienteItem(){
+fun RecienteItem(nombre : String, descr : String){
     Card (
         modifier = Modifier
             .height(100.dp)
@@ -73,12 +73,12 @@ fun RecienteItem(){
                     .padding(start = 20.dp, top = 15.dp)
             ){
                 Text(
-                    text = "Guitarra electrica",
+                    text = nombre,
                     fontFamily = robotoFont,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "Fender Stratocaster",
+                    text = descr,
                     color = MaterialTheme.colorScheme.tertiary,
                     fontSize = 12.sp,
                     fontFamily = robotoFont
@@ -101,6 +101,6 @@ fun RecienteItem(){
 @Composable
 fun RecienteItemPreview(){
     MusicRepoTheme {
-        RecienteItem()
+        RecienteItem("Prueba", "Descr")
     }
 }

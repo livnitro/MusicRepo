@@ -39,6 +39,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.musicrepo.presentation.models.TabBarItem
 import com.example.musicrepo.presentation.ui.screens.BookmarksScreen
+import com.example.musicrepo.presentation.ui.screens.GuitarsScreen
 import com.example.musicrepo.presentation.ui.screens.HomeScreen
 import com.example.musicrepo.presentation.ui.screens.IntrumentsScreen
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
@@ -69,13 +70,13 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(innerPadding = innerPadding)
                         }
                         composable(route = Screen.Instruments.route) {
-                            IntrumentsScreen()
+                            IntrumentsScreen(innerPadding = innerPadding)
                         }
                         composable(settingsTab.title) {
                             BookmarksScreen(innerPadding = innerPadding)
                         }
                         composable(moreTab.title) {
-                            MoreView()
+                            GuitarsScreen()
                         }
                     }
                 }
@@ -113,8 +114,6 @@ fun TabView(tabBarItems: List<TabBarItem>, navController: NavController) {
     }
 }
 
-// This component helps to clean up the API call from our TabView above,
-// but could just as easily be added inside the TabView without creating this custom component
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TabBarIconView(
@@ -132,8 +131,6 @@ fun TabBarIconView(
     }
 }
 
-// This component helps to clean up the API call from our TabBarIconView above,
-// but could just as easily be added inside the TabBarIconView without creating this custom component
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun TabBarBadgeView(count: Int? = null) {
@@ -141,19 +138,6 @@ fun TabBarBadgeView(count: Int? = null) {
         Badge {
             Text(count.toString())
         }
-    }
-}
-
-@Composable
-fun MoreView() {
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Text("Thing 1")
-        Text("Thing 2")
-        Text("Thing 3")
-        Text("Thing 4")
-        Text("Thing 5")
     }
 }
 
