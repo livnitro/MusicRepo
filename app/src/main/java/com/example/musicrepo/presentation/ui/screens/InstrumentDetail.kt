@@ -16,6 +16,7 @@ import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
 import com.example.musicrepo.R
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.musicrepo.presentation.components.BookmarkItem
@@ -23,95 +24,71 @@ import com.example.musicrepo.presentation.components.BookmarkItemView
 import com.example.musicrepo.utils.*
 
 @Composable
-fun InstrumentDetailScreen(innerPadding : PaddingValues, idInstrument : Int = 0){
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+fun InstrumentDetailScreen(innerPadding: PaddingValues, idInstrument: Int = 0) {
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
-            .padding(20.dp),
+            .padding(20.dp)
+            .offset(y = 40.dp)
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
     ){
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(140.dp)
-                .padding(innerPadding),
-            contentAlignment = Alignment.CenterStart
-        ){
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black)
-                    .padding(20.dp)
-            ){
-                Text(
-                    text = "Classic Vibe '60s Jazzmaster",
-                    fontSize = 36.sp,
-                    fontFamily = righteousFont,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.tertiary,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-                Text(
-                    text = "Fender",
-                    fontSize = 24.sp,
-                    fontFamily = righteousFont,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-            }
-        }
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black)
-                .padding(20.dp)
-        ) {
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)
+            .offset(y = 40.dp)
+            .background(MaterialTheme.colorScheme.background)
+        ){
+            Text(
+                text = "Classic Vibe '60s Jazzmaster",
+                fontSize = 36.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp),
+                color = MaterialTheme.colorScheme.tertiary,
+                fontWeight = FontWeight.Bold,
+                fontFamily = righteousFont
+            )
+            Text(
+                text = "Fender",
+                fontSize = 24.sp,
+                fontFamily = righteousFont,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+            )
             Image(
                 painter = painterResource(id = R.drawable.jazzmaster),
                 contentDescription = null,
                 modifier = Modifier
-                    .fillMaxWidth(0.8f),
+                    .fillMaxWidth(0.9f)
+                    .padding(10.dp),
                 contentScale = ContentScale.Crop
             )
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.secondary)
+                    .padding(10.dp)
             ){
-                Column {
-                    Text(
-                        text = "Descripción",
-                        fontSize = 16.sp,
-                        fontFamily = robotoFont,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        modifier = Modifier
-                            .padding(top = 20.dp, start = 20.dp)
-                    )
-                    Text(
-                        text = "La Classic Vibe ‘60s Jazzmaster® es un tributo fiel y sorprendente a uno de los modelos " +
-                                "legendarios de Fender. Reproduce el sonido incomparable de la Jazzmaster gracias a sus " +
-                                "dos pastillas de bobina simple diseñadas por Fender e imanes de Alnico.",
-                        fontSize = 16.sp,
-                        fontFamily = robotoFont,
-                        color = Color.White,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(20.dp)
-                    )
-                }
+                Text(
+                    text = "La Classic Vibe ‘60s Jazzmaster® es un tributo fiel y sorprendente a uno de los modelos " +
+                            "legendarios de Fender. Reproduce el sonido incomparable de la Jazzmaster gracias a sus " +
+                            "dos pastillas de bobina simple diseñadas por Fender e imanes de Alnico.",
+                    fontSize = 16.sp,
+                    fontFamily = robotoFont,
+                    color = Color.White,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
-
-
     }
 }
+
 
 @Preview
 @Composable

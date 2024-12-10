@@ -25,28 +25,23 @@ import com.example.musicrepo.utils.*
 @Composable
 fun BookmarksScreen(innerPadding : PaddingValues){
     Column (
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
-            .padding(20.dp),
+            .padding(innerPadding)
+            .background(MaterialTheme.colorScheme.background)
     ){
-        Box(
+        Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp)
-                .padding(innerPadding),
-            contentAlignment = Alignment.CenterStart
+                .padding(all = 30.dp)
         ){
             Text(
                 text = "Guardados",
+                modifier = Modifier.width(170.dp),
                 fontSize = 24.sp,
-                fontFamily = righteousFont,
-                fontWeight = FontWeight.Bold,
                 color = Color.White,
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .fillMaxWidth()
+                fontWeight = FontWeight.Bold,
+                fontFamily = righteousFont
             )
         }
         BookmarksList()
