@@ -2,8 +2,6 @@ package com.example.musicrepo.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,82 +26,71 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import com.example.musicrepo.R
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
-import com.example.musicrepo.utils.righteousFont
 import com.example.musicrepo.utils.robotoFont
 
+data class BookmarkItem(
+    val imageResId: Int,
+    val brand: String,
+    val model: String
+)
+
 @Composable
-fun RecienteItem(nombre : String, modelo : String, imagen: String = "", onClick: () -> Unit){
-    Card (
+fun BookmarkItemView(item: BookmarkItem) {
+    Card(
         modifier = Modifier
-            .height(100.dp)
             .fillMaxWidth()
-            .clickable { onClick() }
-        ,
-        shape = RoundedCornerShape(20.dp),
+            .padding(horizontal = 8.dp)
+            .size(120.dp),
+        shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondary
-        )
-    ){
-        Row(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Box (
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(80.dp)
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White)
-            ){
-                AsyncImage(
-                    model = imagen,
-                    contentDescription = modelo,
-                    modifier = Modifier.fillMaxSize()
+                containerColor = MaterialTheme.colorScheme.secondary
                 )
-            }
-            Column (
+    ) {
+        Row(
+            modifier = Modifier.padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(id = item.imageResId),
+                contentDescription = null,
                 modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(start = 20.dp, top = 15.dp)
-            ){
+                    .size(100.dp)
+                    .background(Color.Gray, shape = RoundedCornerShape(8.dp)),
+                contentScale = ContentScale.Crop
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column {
                 Text(
-                    text = nombre,
+                    text = item.brand,
+                    fontSize = 16.sp,
                     fontFamily = robotoFont,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = modelo,
-                    color = MaterialTheme.colorScheme.tertiary,
-                    fontSize = 12.sp,
-                    fontFamily = robotoFont
+                    text = item.model,
+                    fontSize = 14.sp,
+                    fontFamily = robotoFont,
+                    color = MaterialTheme.colorScheme.tertiary
                 )
             }
-            Spacer(modifier = Modifier.weight(1f))
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowRight,
-                contentDescription = "Flecha",
-                tint = MaterialTheme.colorScheme.tertiary,
-                modifier = Modifier
-                    .padding(end = 10.dp)
-                    .size(30.dp)
-            )
         }
     }
 }
 
 @Preview
 @Composable
-fun RecienteItemPreview(){
-    MusicRepoTheme {
-        RecienteItem("Prueba", "Descr", onClick = ({}))
-    }
+fun BookmarkItemPreview() {
+    BookmarkItemView(
+        item = BookmarkItem(R.drawable.jazzmaster, "Guitarra Eléctrica", "Fender Stratocaster")
+    )
 }

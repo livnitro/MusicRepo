@@ -1,6 +1,7 @@
 package com.example.musicrepo.presentation.ui.screens
 
 import android.graphics.pdf.PdfDocument.Page
+import android.util.Log
 import androidx.annotation.ColorRes
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -23,20 +24,29 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -45,24 +55,85 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.musicrepo.R
+import com.example.musicrepo.datasource.service.CatService
+import com.example.musicrepo.datasource.service.InstrumentsService
+import com.example.musicrepo.domain.dtos.CatResponse
+import com.example.musicrepo.domain.dtos.InstrumentResponse
+import com.example.musicrepo.domain.use_cases.SharedPref
 import com.example.musicrepo.presentation.components.CardCarrousel
 import com.example.musicrepo.presentation.components.RecienteItem
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
+import com.example.musicrepo.utils.Screen
 import com.example.musicrepo.utils.righteousFont
 import com.example.musicrepo.utils.robotoFont
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.math.absoluteValue
 
 @Composable
-fun HomeScreen(innerPadding : PaddingValues){
-    val pagerState = rememberPagerState(pageCount = { 10 })
+fun HomeScreen(innerPadding : PaddingValues, navController: NavController){
+    val sharedPref = SharedPref(LocalContext.current)
+    val scope = rememberCoroutineScope()
+    val pagerState = rememberPagerState(pageCount = { 5 })
+    var instrumentosAleatorios by remember {
+        mutableStateOf(emptyList<InstrumentResponse>())
+    }
+    var instrumentosRecientes by remember {
+        mutableStateOf(emptyList<InstrumentResponse>())
+    }
+    var isLoading by remember {
+        mutableStateOf(true)
+    }
+
+    LaunchedEffect(key1 = true) {
+        scope.launch(Dispatchers.IO) {
+            try {
+                val instrumentsService = Retrofit.Builder()
+                    .baseUrl("https://api.cosmobius.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(InstrumentsService::class.java)
+                isLoading = true
+                val peticion = async { instrumentsService.get5Instruments() }
+                val peticion2 = async { instrumentsService.getLast3Instruments() }
+
+                val response = peticion.await()
+                val response2 = peticion2.await()
+                isLoading = false
+
+                if(response.code() == 200) {
+                    withContext(Dispatchers.Main){
+                        instrumentosAleatorios = response.body()!!
+                    }
+                }
+                if(response2.code() == 200) {
+                    withContext(Dispatchers.Main){
+                        instrumentosRecientes = response2.body()!!
+                    }
+                }
+
+            }catch (e:Exception){
+                Log.e("Instruments Error", e.toString())
+            }
+        }
+    }
+
 
     Column (
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
             .background(MaterialTheme.colorScheme.background)
+            .verticalScroll(
+                rememberScrollState()
+            )
     ){
         Row (
             modifier = Modifier
@@ -71,8 +142,8 @@ fun HomeScreen(innerPadding : PaddingValues){
         ){
             Text(
                 text = "Instrumentos recomendados",
-                modifier = Modifier.width(170.dp),
-                fontSize = 24.sp,
+                modifier = Modifier.width(210.dp),
+                fontSize = 26.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontFamily = righteousFont
@@ -86,12 +157,10 @@ fun HomeScreen(innerPadding : PaddingValues){
         ) { page ->
 //            val pageOffset = pagerState.getOffsetDistanceInPages(page).absoluteValue
 
+            val instrumento = instrumentosAleatorios.getOrNull(page)
             Card(
                 modifier = Modifier
                     .graphicsLayer {
-                        // Calculate the absolute offset for the current page from the
-                        // scroll position. We use the absolute value which allows us to mirror
-                        // any effects for both directions
                         val pageOffset = (
                                 (pagerState.currentPage - page) + pagerState
                                     .currentPageOffsetFraction
@@ -119,10 +188,33 @@ fun HomeScreen(innerPadding : PaddingValues){
                     }
                     .padding(end = 10.dp)
                     .height(330.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .clickable {
+                        if (instrumento != null) {
+                            sharedPref.saveNextId(instrumento.id)
+                            navController.navigate(Screen.InstrumentDetail.route)
+                        }
+                    },
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                ),
                 shape = RoundedCornerShape(35.dp)
             ) {
-                CardCarrousel()
+                if (isLoading) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ){
+                        CircularProgressIndicator(
+                            color = MaterialTheme.colorScheme.tertiary
+                        )
+                    }
+                } else{
+                    if (instrumento != null) {
+                        CardCarrousel(nombre = instrumento.nombre , modelo = instrumento.modelo, imagen = instrumento.imagen)
+                    }
+                }
             }
         }
         Row(
@@ -133,7 +225,6 @@ fun HomeScreen(innerPadding : PaddingValues){
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val coroutineScope = rememberCoroutineScope()
             repeat(pagerState.pageCount) { iteration ->
                 val color = if (pagerState.currentPage == iteration) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.secondary
                 val boxSize = if (pagerState.currentPage == iteration) 15.dp else 10.dp
@@ -146,7 +237,7 @@ fun HomeScreen(innerPadding : PaddingValues){
                         .background(color)
                         .size(16.dp)
                         .clickable {
-                            coroutineScope.launch {
+                            scope.launch {
                                 pagerState.animateScrollToPage(iteration)
                             }
                         }
@@ -166,11 +257,28 @@ fun HomeScreen(innerPadding : PaddingValues){
         Column (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 30.dp),
+                .padding(horizontal = 30.dp)
+                .padding(bottom = 30.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ){
-            RecienteItem()
-            RecienteItem()
+            if (isLoading) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ){
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.tertiary
+                    )
+                }
+            } else {
+                instrumentosRecientes.forEach {instrumento ->
+                    RecienteItem(nombre=instrumento.nombre, modelo=instrumento.modelo, imagen = instrumento.imagen, onClick = ({
+                        sharedPref.saveNextId(instrumento.id)
+                        navController.navigate(Screen.InstrumentDetail.route)
+                    }))
+                }
+            }
         }
     }
 }
@@ -183,6 +291,7 @@ fun HomeScreen(innerPadding : PaddingValues){
 @Composable
 fun HomeScreenPreview(){
     MusicRepoTheme {
-        HomeScreen(innerPadding = PaddingValues(0.dp))
+        val navController = rememberNavController()
+        HomeScreen(innerPadding = PaddingValues(0.dp), navController = navController)
     }
 }
