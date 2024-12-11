@@ -52,6 +52,8 @@ fun GuitarsScreen(innerPadding: PaddingValues, navController: NavController) {
     var instruments by remember {
         mutableStateOf(emptyList<InstrumentResponse>())
     }
+    val favList = sharedPref.getFavList()
+    val queryParam = favList.joinToString(",")
 
     Log.i("Info", guitarMode.toString())
     if(guitarMode == 0){
@@ -65,6 +67,28 @@ fun GuitarsScreen(innerPadding: PaddingValues, navController: NavController) {
                         .build()
                         .create(InstrumentsService::class.java)
                     val response = InstrumentsService.getAllByCatId(catId)
+                    Log.i("InstrumentScreen", response.toString())
+                    Log.i("InstrumentScreen", response.body().toString())
+                    if (response.code() == 200) {
+                        withContext(Dispatchers.Main) {
+                            instruments = response.body()!!
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e("Instruments Error", e.toString())
+                }
+            }
+        }
+    }else{
+        LaunchedEffect(key1 = true) {
+            scope.launch(Dispatchers.IO) {
+                try {
+                    val InstrumentsService = Retrofit.Builder()
+                        .baseUrl("https://api.cosmobius.com/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                        .create(InstrumentsService::class.java)
+                    val response = InstrumentsService.getInstrumentsByList(queryParam)
                     Log.i("InstrumentScreen", response.toString())
                     Log.i("InstrumentScreen", response.body().toString())
                     if (response.code() == 200) {

@@ -47,6 +47,7 @@ fun InstrumentsCatScreen(innerPadding: PaddingValues, navController: NavControll
         mutableStateOf(emptyList<CatResponse>())
     }
 
+
     LaunchedEffect(key1 = true) {
         scope.launch(Dispatchers.IO) {
             try {

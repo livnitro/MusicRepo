@@ -21,4 +21,8 @@ interface InstrumentsService {
 
     @GET("getLast3Instruments.php")
     suspend fun getLast3Instruments() : Response<List<InstrumentResponse>>
+
+    @GET("getInstrumentsByList.php")
+    suspend fun getInstrumentsByList(@Query("favList") favList: String) : Response<List<InstrumentResponse>>
+
 }

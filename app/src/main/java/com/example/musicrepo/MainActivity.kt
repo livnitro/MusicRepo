@@ -35,11 +35,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.musicrepo.domain.use_cases.SharedPref
 import com.example.musicrepo.presentation.models.TabBarItem
 import com.example.musicrepo.presentation.ui.screens.BookmarksScreen
 import com.example.musicrepo.presentation.ui.screens.HomeScreen
@@ -102,12 +104,15 @@ fun TabView(tabBarItems: List<TabBarItem>, navController: NavController) {
         mutableStateOf(0)
     }
 
+    val sharedPref = SharedPref(LocalContext.current)
+
     NavigationBar {
         // looping over each tab to generate the views and navigation for each item
         tabBarItems.forEachIndexed { index, tabBarItem ->
             NavigationBarItem(
                 selected = selectedTabIndex == index,
                 onClick = {
+                    sharedPref.saveGuitarMode(1)
                     selectedTabIndex = index
                     navController.navigate(tabBarItem.title)
                 },

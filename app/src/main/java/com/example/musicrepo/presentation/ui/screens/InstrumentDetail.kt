@@ -54,6 +54,8 @@ fun InstrumentDetailScreen(innerPadding: PaddingValues, idInstrument: Int = 0) {
         mutableStateOf(emptyList<InstrumentResponse>())
     }
 
+    var buttonText by remember { mutableStateOf("Agregar a favoritos") }
+
     LaunchedEffect(key1 = true) {
         scope.launch(Dispatchers.IO) {
             try {
@@ -137,7 +139,8 @@ fun InstrumentDetailScreen(innerPadding: PaddingValues, idInstrument: Int = 0) {
                 }
                 Button(
                     onClick = {
-                        /*TODO*/
+                        sharedPref.addNumberToFavList(it.id)
+                        buttonText = "Agregado"
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.tertiary
@@ -147,7 +150,7 @@ fun InstrumentDetailScreen(innerPadding: PaddingValues, idInstrument: Int = 0) {
                         .height(60.dp)
                 ) {
                     Text(
-                        text = "Agregar a favoritos",
+                        text = buttonText,
                         fontSize = 16.sp,
                         fontFamily = righteousFont,
                         color = MaterialTheme.colorScheme.secondary,

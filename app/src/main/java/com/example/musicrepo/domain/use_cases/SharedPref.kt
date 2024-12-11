@@ -27,13 +27,38 @@ class SharedPref (context: Context){
         editor.apply()
     }
 
-    fun getInstrumList(): Response<List<InstrumentResponse>> {
-        val json = sharedPref.getString("instrumList", null)
-        return if (json != null) {
-            val type = object : TypeToken<Response<List<InstrumentResponse>>>() {}.type
-            Gson().fromJson(json, type)
+    fun saveFavList(favList: List<Int>) {
+        val editor = sharedPref.edit()
+        val listAsString = favList.joinToString(",")
+        editor.putString("favList", listAsString)
+        editor.apply()
+    }
+
+    fun getFavList(): List<Int>{
+        val listAsString = sharedPref.getString("favList", null)
+
+        return if (listAsString != null && listAsString.isNotEmpty()) {
+            listAsString.split(",").map { it.toInt() }
         } else {
-            Response.success(emptyList())
+            emptyList()
+        }
+    }
+
+    fun addNumberToFavList(number: Int) {
+        val listAsString = sharedPref.getString("favList", null)
+
+        val favList = if (!listAsString.isNullOrEmpty()) {
+            listAsString.split(",").map { it.toInt() }.toMutableList()
+        } else {
+            mutableListOf()
+        }
+
+        if (!favList.contains(number)) {
+            favList.add(number)
+
+            val editor = sharedPref.edit()
+            editor.putString("favList", favList.joinToString(","))
+            editor.apply()
         }
     }
 
