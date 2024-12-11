@@ -41,6 +41,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.log
 
 @Composable
 fun GuitarsScreen(innerPadding: PaddingValues, navController: NavController) {
@@ -80,6 +81,7 @@ fun GuitarsScreen(innerPadding: PaddingValues, navController: NavController) {
             }
         }
     }else{
+        Log.i("HEYOOOOO", favList.toString())
         LaunchedEffect(key1 = true) {
             scope.launch(Dispatchers.IO) {
                 try {
@@ -88,7 +90,7 @@ fun GuitarsScreen(innerPadding: PaddingValues, navController: NavController) {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                         .create(InstrumentsService::class.java)
-                    val response = InstrumentsService.getInstrumentsByList(queryParam)
+                    val response = InstrumentsService.getInstrumentsByList(favList.toString())
                     Log.i("InstrumentScreen", response.toString())
                     Log.i("InstrumentScreen", response.body().toString())
                     if (response.code() == 200) {
