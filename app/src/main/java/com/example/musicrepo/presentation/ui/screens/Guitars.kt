@@ -116,7 +116,7 @@ fun GuitarsScreen(innerPadding: PaddingValues, navController: NavController) {
                         navController.navigate(Screen.InstrumentDetail.route)
                     })
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(4.dp))
             }
         }
     }
@@ -127,7 +127,7 @@ fun GuitarCard(title: String, marca: String, modelo: String, imagenUrl: String, 
     Card(
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
-            .padding(8.dp)
+            .padding(4.dp)
             .background(Color(0xFF2A2C33))
             .clip(RoundedCornerShape(16.dp))
             .clickable { onClick() }
@@ -136,7 +136,7 @@ fun GuitarCard(title: String, marca: String, modelo: String, imagenUrl: String, 
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color(0xFF121212))
-                .padding(bottom = 8.dp, top = 8.dp, start = 16.dp, end = 16.dp)
+                .padding(16.dp)
                 .clip(RoundedCornerShape(16.dp)),
             verticalAlignment = Alignment.CenterVertically
         ) {
