@@ -36,11 +36,11 @@ fun InstrumentDetailScreen(innerPadding: PaddingValues, idInstrument: Int = 0) {
         contentAlignment = Alignment.Center
     ){
         Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
-            .offset(y = 40.dp)
-            .background(MaterialTheme.colorScheme.background)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp)
+                .offset(y = 40.dp)
+                .background(MaterialTheme.colorScheme.background)
         ){
             Text(
                 text = "Classic Vibe '60s Jazzmaster",

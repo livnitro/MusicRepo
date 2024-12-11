@@ -15,6 +15,4 @@ interface InstrumentsService {
 
     @GET("getInstrumentById.php")
     suspend fun getById(@Query("idInstrum") idInstrum: Int) : Response<List<InstrumentResponse>>
-
-
 }
