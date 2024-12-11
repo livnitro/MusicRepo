@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                             InstrumentsCatScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = Screen.BookMarks.route) {
-                            BookmarksScreen(innerPadding = innerPadding)
+                            GuitarsScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = Screen.InstrumentDetail.route) {
                             InstrumentDetailScreen(innerPadding = innerPadding)
