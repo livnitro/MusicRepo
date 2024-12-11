@@ -18,9 +18,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.musicrepo.datasource.service.CatService
 import com.example.musicrepo.datasource.service.InstrumentsService
@@ -29,6 +33,7 @@ import com.example.musicrepo.domain.dtos.InstrumentResponse
 import com.example.musicrepo.domain.use_cases.SharedPref
 import com.example.musicrepo.presentation.components.MiniCatBannerView
 import com.example.musicrepo.utils.Screen
+import com.example.musicrepo.utils.righteousFont
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -66,7 +71,13 @@ fun InstrumentsCatScreen(innerPadding: PaddingValues, navController: NavControll
 
     val sharedPref = SharedPref(LocalContext.current)
     Column (modifier =  Modifier.padding(innerPadding).padding(start = 20.dp, end = 20.dp, top = 32.dp)){
-        Text("Nuestras Categorias")
+        Text(
+            text = "Nuestras Categorias",
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            fontFamily = righteousFont,
+            color = Color.White
+        )
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -84,5 +95,4 @@ fun InstrumentsCatScreen(innerPadding: PaddingValues, navController: NavControll
             }
         }
     }
-
 }

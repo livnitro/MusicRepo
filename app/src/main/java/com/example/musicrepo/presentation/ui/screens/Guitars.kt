@@ -32,6 +32,7 @@ import com.example.musicrepo.datasource.service.InstrumentsService
 import com.example.musicrepo.domain.dtos.InstrumentResponse
 import com.example.musicrepo.domain.use_cases.SharedPref
 import com.example.musicrepo.utils.Screen
+import com.example.musicrepo.utils.righteousFont
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -99,6 +100,7 @@ fun GuitarsScreen(innerPadding: PaddingValues, navController: NavController) {
                         text = "Explora los instrumentos",
                         fontWeight = FontWeight.Bold,
                         fontSize = 24.sp,
+                        fontFamily = righteousFont,
                         color = Color.White,
                         modifier = Modifier.align(Alignment.TopStart)
                     )
