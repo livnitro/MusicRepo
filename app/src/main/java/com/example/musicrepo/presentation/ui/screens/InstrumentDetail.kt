@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.materialIcon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import com.example.musicrepo.presentation.components.BookmarkItem
 import com.example.musicrepo.presentation.components.BookmarkItemView
 import com.example.musicrepo.utils.*
@@ -85,6 +87,27 @@ fun InstrumentDetailScreen(innerPadding: PaddingValues, idInstrument: Int = 0) {
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+            Button(
+                onClick = {
+                    /*TODO*/
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary
+                ),
+                modifier = Modifier
+                    .padding(top = 10.dp, bottom = 10.dp)
+                    .height(60.dp)
+            ) {
+                Text(
+                    text = "Agregar a favoritos",
+                    fontSize = 16.sp,
+                    fontFamily = righteousFont,
+                    color = MaterialTheme.colorScheme.secondary,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            }
+
         }
     }
 }
