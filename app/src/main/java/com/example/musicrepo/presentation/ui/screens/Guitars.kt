@@ -136,7 +136,7 @@ fun GuitarCard(title: String, marca: String, modelo: String, imagenUrl: String, 
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color(0xFF121212))
-                .padding(16.dp)
+                .padding(bottom = 8.dp, top = 8.dp, start = 16.dp, end = 16.dp)
                 .clip(RoundedCornerShape(16.dp)),
             verticalAlignment = Alignment.CenterVertically
         ) {
