@@ -181,6 +181,7 @@ fun GuitarCard(title: String, marca: String, modelo: String, imagenUrl: String, 
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .height(110.dp)
+                        .align(Alignment.Center)
                         .clip(RoundedCornerShape(16.dp))
                 )
             }
@@ -199,19 +200,12 @@ fun GuitarCard(title: String, marca: String, modelo: String, imagenUrl: String, 
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                // Fila para Marca y Modelo
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
                         text = modelo,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 13.sp,
-                        color = Color(0xFFFFD700)
-                    )
-                    Text(
-                        text = marca,
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         color = Color(0xFFFFD700)

@@ -90,13 +90,23 @@ fun InstrumentDetailScreen(innerPadding: PaddingValues, idInstrument: Int = 0) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(20.dp)
-                .offset(y = 40.dp)
-                .background(MaterialTheme.colorScheme.background)
+                .background(MaterialTheme.colorScheme.background),
+            horizontalAlignment = Alignment.CenterHorizontally
         ){
             items(instrument){
                 Text(
                     text = it.nombre,
-                    fontSize = 36.sp,
+                    fontSize = 32.sp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
+                    color = MaterialTheme.colorScheme.tertiary,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = righteousFont
+                )
+                Text(
+                    text = it.modelo,
+                    fontSize = 20.sp,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp),
@@ -106,7 +116,7 @@ fun InstrumentDetailScreen(innerPadding: PaddingValues, idInstrument: Int = 0) {
                 )
                 Text(
                     text = it.marca,
-                    fontSize = 24.sp,
+                    fontSize = 20.sp,
                     fontFamily = righteousFont,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
