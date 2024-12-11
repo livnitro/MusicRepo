@@ -12,4 +12,9 @@ interface InstrumentsService {
 
     @GET("getAllInstrumentsByCatId.php")
     suspend fun getAllByCatId(@Query("catId") catId: Int) : Response<List<InstrumentResponse>>
+
+    @GET("getInstrumentById.php")
+    suspend fun getById(@Query("idInstrum") idInstrum: Int) : Response<List<InstrumentResponse>>
+
+
 }

@@ -76,7 +76,7 @@ fun InstrumentsCatScreen(innerPadding: PaddingValues, navController: NavControll
             items(cats){
                 MiniCatBannerView(it.nombre, onClick = ({
                     sharedPref.saveNextId(it.id)
-                    navController.navigate(Screen.Instruments.route)
+                    navController.navigate(Screen.Guitars.route)
                 }) )
             }
         }
