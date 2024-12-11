@@ -42,7 +42,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.musicrepo.presentation.models.TabBarItem
 import com.example.musicrepo.presentation.ui.screens.BookmarksScreen
-import com.example.musicrepo.presentation.ui.screens.GuitarsScreen
 import com.example.musicrepo.presentation.ui.screens.HomeScreen
 import com.example.musicrepo.presentation.ui.screens.InstrumentDetailScreen
 import com.example.musicrepo.presentation.ui.screens.InstrumentsCatScreen
@@ -69,10 +68,10 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = { TabView(tabBarItems, navController) }) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.Guitars.route
+                        startDestination = Screen.Home.route
                     ){
-                        composable(route = Screen.Guitars.route) {
-                            GuitarsScreen(innerPadding = innerPadding)
+                        composable(route = Screen.Home.route) {
+                            HomeScreen(innerPadding = innerPadding)
                         }
                         composable(route = Screen.InstrumentsCat.route) {
                             InstrumentsCatScreen(innerPadding = innerPadding, navController = navController)
@@ -92,6 +91,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun TabView(tabBarItems: List<TabBarItem>, navController: NavController) {
