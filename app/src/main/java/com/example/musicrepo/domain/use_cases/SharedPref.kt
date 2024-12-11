@@ -37,4 +37,14 @@ class SharedPref (context: Context){
         }
     }
 
+    fun saveGuitarMode(mode : Int){
+        val editor = sharedPref.edit()
+        editor.putInt("guitarMode", mode)
+        editor.apply()
+    }
+
+    fun getGuitarMode() : Int{
+        return sharedPref.getInt("guitarMode", 0)
+    }
+
 }

@@ -85,6 +85,9 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.Instruments.route) {
                             IntrumentsScreen(innerPadding = innerPadding, navController = navController)
                         }
+                        composable(route = Screen.Guitars.route) {
+                            GuitarsScreen(innerPadding = innerPadding, navController = navController)
+                        }
                     }
                 }
             }
