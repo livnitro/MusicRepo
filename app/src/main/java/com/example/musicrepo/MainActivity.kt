@@ -48,6 +48,7 @@ import com.example.musicrepo.presentation.ui.screens.InstrumentDetailScreen
 import com.example.musicrepo.presentation.ui.screens.InstrumentsCatScreen
 import com.example.musicrepo.presentation.ui.screens.IntrumentsScreen
 import com.example.musicrepo.presentation.ui.theme.MusicRepoTheme
+import com.example.musicrepo.ui.screens.GuitarsScreen
 import com.example.musicrepo.utils.Screen
 
 class MainActivity : ComponentActivity() {
@@ -68,10 +69,10 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = { TabView(tabBarItems, navController) }) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.Home.route
+                        startDestination = Screen.Guitars.route
                     ){
-                        composable(route = Screen.Home.route) {
-                            HomeScreen(innerPadding = innerPadding)
+                        composable(route = Screen.Guitars.route) {
+                            GuitarsScreen(innerPadding = innerPadding)
                         }
                         composable(route = Screen.InstrumentsCat.route) {
                             InstrumentsCatScreen(innerPadding = innerPadding, navController = navController)
