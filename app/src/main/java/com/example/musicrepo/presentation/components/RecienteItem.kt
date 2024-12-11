@@ -41,7 +41,7 @@ import com.example.musicrepo.utils.righteousFont
 import com.example.musicrepo.utils.robotoFont
 
 @Composable
-fun RecienteItem(nombre : String, descr : String, imagen: String = "", onClick: () -> Unit){
+fun RecienteItem(nombre : String, modelo : String, imagen: String = "", onClick: () -> Unit){
     Card (
         modifier = Modifier
             .height(100.dp)
@@ -67,7 +67,7 @@ fun RecienteItem(nombre : String, descr : String, imagen: String = "", onClick: 
             ){
                 AsyncImage(
                     model = imagen,
-                    contentDescription = descr,
+                    contentDescription = modelo,
                     modifier = Modifier.fillMaxSize()
                 )
             }
@@ -82,7 +82,7 @@ fun RecienteItem(nombre : String, descr : String, imagen: String = "", onClick: 
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = descr,
+                    text = modelo,
                     color = MaterialTheme.colorScheme.tertiary,
                     fontSize = 12.sp,
                     fontFamily = robotoFont

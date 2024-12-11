@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = Screen.Home.route
                     ){
                         composable(route = Screen.Home.route) {
-                            HomeScreen(innerPadding = innerPadding)
+                            HomeScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = Screen.InstrumentsCat.route) {
                             InstrumentsCatScreen(innerPadding = innerPadding, navController = navController)
