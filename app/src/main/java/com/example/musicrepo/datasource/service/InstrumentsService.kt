@@ -12,4 +12,10 @@ interface InstrumentsService {
 
     @GET("getAllInstrumentsByCatId.php")
     suspend fun getAllByCatId(@Query("catId") catId: Int) : Response<List<InstrumentResponse>>
+
+    @GET("get5randomInstruments.php")
+    suspend fun get5Instruments() : Response<List<InstrumentResponse>>
+
+    @GET("getLast3Instruments.php")
+    suspend fun getLast3Instruments() : Response<List<InstrumentResponse>>
 }
