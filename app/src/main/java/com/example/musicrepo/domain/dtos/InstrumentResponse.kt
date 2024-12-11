@@ -1,6 +1,7 @@
 package com.example.musicrepo.domain.dtos
 
 data class InstrumentResponse(
+    val id : Int,
     val nombre : String,
     val descr : String,
     val marca : String,
